@@ -1,5 +1,5 @@
 import React from "react";
-import { Music } from "./Music";
+import { Music } from "./MusicItem";
 
 export class MusicList extends React.Component {
     constructor(props) {
@@ -16,7 +16,6 @@ export class MusicList extends React.Component {
     async loadData(path) {
         const res = await fetch(path);
         const json = await res.json();
-        console.log(json);
 
         this.setState({ musicList: json});
     }
