@@ -1,12 +1,12 @@
 import React from "react";
-import SoundBar from "./SoundBar";
+import styles from "../../css/soundItem.css";
 
-export class Music extends React.Component {
+export class SoundItem extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            musicInfo: props.music,
+            soundInfo: props.music,
             isPlaying: false,
             x: 0
         };
@@ -25,7 +25,8 @@ export class Music extends React.Component {
     updateBar() {
         let duration = this.audio.duration;
         let curr = this.audio.currentTime;
-        let x = 500 * (curr / duration);
+        let x = 170 * (curr / duration);
+        //console.log(curr);
         
         this.setState({
             x: x
@@ -33,18 +34,15 @@ export class Music extends React.Component {
     }
 
     render() {
-        let { musicInfo } = this.state;
-        let barLeft = { left: this.state.x + "px" };
+        let { soundInfo } = this.state;
         let barWidth = { width: this.state.x + "px" };
 
         return (
-            <div>
-                <p>{musicInfo.author} - {musicInfo.title} <span className={this.state.isPlaying ? "btn_stop" : "btn_play"} onClick={() => this.switchPlay()}></span></p>
-                <div className="progBarFull">
-                    <span className="progBarLeft" style={barWidth}></span>
-                    <span className="progPoint" style={barLeft}></span>
+            <div className={styles.root}>
+                <p>{soundInfo.author} - {soundInfo.title} <span className={this.state.isPlaying ? styles.btnStop : styles.btnPlay} onClick={() => this.switchPlay()}></span></p>
+                <div className={styles.barFull}>
+                    <span className={styles.barLeft} style={barWidth}></span>
                 </div>
-                <SoundBar />
             </div>
         );
     };

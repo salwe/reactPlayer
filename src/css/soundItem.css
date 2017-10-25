@@ -1,0 +1,37 @@
+.root {
+    width: 175px;
+    height: 250px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    border: solid 1px #ccc;
+}
+
+.btnPlay {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 10px solid #2f3036;
+    border-bottom: 5px solid transparent;
+    cursor: pointer;
+}
+.btnStop {
+    display: inline-block;
+    background: #2f3036;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+.barFull {
+    position: relative;
+    width: 170px;
+    height: 2px;
+    background: #ccc;
+}
+.barLeft {
+    display: block;
+    height: 2px;
+    width: 0;
+    background: #969696;
+}

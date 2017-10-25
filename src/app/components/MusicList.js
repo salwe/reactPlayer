@@ -1,5 +1,5 @@
 import React from "react";
-import { Music } from "./MusicItem";
+import { SoundItem } from "./SoundItem";
 
 export class MusicList extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ export class MusicList extends React.Component {
         if (this.state.musicList.length) {
             return (
                 <div>
-                    {this.state.musicList.map((el, i) => <Music key={i} music={el} />)}
+                    {this.state.musicList.map((el, i) => <SoundItem key={i} music={el} />)}
                 </div>
             );
         }
