@@ -1,16 +1,18 @@
 [
   {
-    "title": "Медведица",
-    "author": "Мумий Тролль",
-    "year": "2015",
-    "album": "Горгород",
-    "src": "/data/music/Мумий Тролль - Медведица.mp3"
+    "title": "Intro",
+    "author": "Sunwalter",
+    "year": "2017",
+    "album": "Alien Hazard",
+    "soundSrc": "/data/music/Sunwalter - Intro.mp3",
+    "imgSrc": "/data/music/sun.png"
   },
   {
-    "title": "В темноте",
-    "author": "Ногу свело",
-    "year": "2015",
-    "album": "Горгород",
-    "src": "/data/music/Ногу Свело - В темноте.mp3"
+    "title": "Intro",
+    "author": "Asphyxia",
+    "year": "2008",
+    "album": "Asphyxia",
+    "soundSrc": "/data/music/Asphyxia - Intro.mp3",
+    "imgSrc": "/data/music/asp.png"
   }
 ]
