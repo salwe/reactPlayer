@@ -1,5 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { SoundItem } from "./SoundItem";
+import { playSound } from "../actions/soundActions";
+import { addSound } from "../actions/soundActions";
+import {store} from "../store";
 
 export class MusicList extends React.Component {
     constructor(props) {
@@ -18,6 +23,8 @@ export class MusicList extends React.Component {
         const json = await res.json();
 
         this.setState({ musicList: json});
+        console.log(json);
+        json.forEach(sound => store.dispatch(addSound({sound})));
     }
 
     render() {
@@ -31,3 +38,19 @@ export class MusicList extends React.Component {
         else return <div>Loading...</div>;
     };
 }
+
+const mapStateToProps = (state) => {
+    //console.log(state);
+    return {
+        tasks: state
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeTask: (id) => {
+            dispatch(removeTask(id));
+        }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MusicList);

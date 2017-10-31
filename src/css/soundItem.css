@@ -26,6 +26,9 @@
     height: 10px;
     cursor: pointer;
 }
+.soundControl {
+    margin: 10px auto;
+}
 .soundInfo {
     margin: 20px auto;
 }
@@ -35,12 +38,15 @@
 .soundAuthor {
     font-size: 14px;
 }
+.barWr {
+    width: 180px;
+    margin: 0 auto;
+}
 .barFull {
     position: relative;
     height: 3px;
     background: #ccc;
     cursor: pointer;
-    margin: 0 auto;
 }
 .barLeft {
     display: block;

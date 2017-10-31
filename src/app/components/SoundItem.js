@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../css/soundItem.css";
 //import play from '../../img/play.svg';
 
+
 export class SoundItem extends React.Component {
     constructor(props) {
         super(props);
@@ -9,8 +10,7 @@ export class SoundItem extends React.Component {
         this.state = {
             soundInfo: props.music,
             isPlaying: false,
-            currTime: 0,
-            barSize: 180
+            currTime: 0
         };
 
         this.audio = new Audio(props.music.soundSrc);
@@ -30,27 +30,31 @@ export class SoundItem extends React.Component {
 
         (curr >= duration) ? console.log("End") :
                             this.setState({
-                                currTime: this.state.barSize * (curr / duration)
+                                currTime: 100 * (curr / duration)
                             });
     }
 
     setTime(e) {
-        var x = e.clientX - e.target.offsetLeft;
-        this.audio.currentTime = x * this.audio.duration / this.state.barSize;
+        var x = e.clientX - e.currentTarget.offsetLeft;
+
+        // converting px to percent
+        var perc = 100 * x / e.currentTarget.getBoundingClientRect().width;
+        this.audio.currentTime = perc * this.audio.duration / 100;
         this.updateBar();
     }
 
     render() {
         let { soundInfo } = this.state;
-        let barWidth = { width: this.state.currTime + "px" };
 
         return (
             <div className={styles.root}>
                 <img src={soundInfo.imgSrc} alt=""/>
                 <div className={styles.soundControl}>
-                    <p><div className={this.state.isPlaying ? styles.btnStop : styles.btnPlay} onClick={() => this.switchPlay()}></div></p>
-                    <div className={styles.barFull} onClick={ (e) => this.setTime(e) } style={{width: this.state.barSize + 'px'}}>
-                        <span className={styles.barLeft} style={barWidth}></span>
+                    <div className={this.state.isPlaying ? styles.btnStop : styles.btnPlay} onClick={() => this.switchPlay()}></div>
+                </div>
+                <div className={styles.barWr}>
+                    <div className={styles.barFull} onClick={(e) => this.setTime(e)} >
+                        <span className={styles.barLeft} style={{width: this.state.currTime + '%'}}></span>
                     </div>
                 </div>
                 <div className={styles.soundInfo}>

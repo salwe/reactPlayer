@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from "./components/Header";
-import { MusicList } from "./components/MusicList";
+import Header from "./Header";
+import { MusicList } from "./MusicList";
 
 class App extends Component {
     render() {
