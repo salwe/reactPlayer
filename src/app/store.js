@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 
-import { sounds } from "./reducers/soundReducers";
+import { songsObj } from "./reducers/songReducers";
 
 
-export const store = createStore(sounds);
+export const store = createStore(songsObj);

@@ -26,16 +26,16 @@
     height: 10px;
     cursor: pointer;
 }
-.soundControl {
+.songControl {
     margin: 10px auto;
 }
-.soundInfo {
+.songInfo {
     margin: 20px auto;
 }
-.soundName {
+.songName {
     font-weight: bold;
 }
-.soundAuthor {
+.songAuthor {
     font-size: 14px;
 }
 .barWr {

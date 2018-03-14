@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from "./Header";
-import { MusicList } from "./MusicList";
+import Header from './Header';
+import MusicApp from '../containers/MusicApp';
 
 class App extends Component {
     render() {
@@ -8,7 +8,7 @@ class App extends Component {
             <div className="container">
                 <Header />
                 <div>
-                    <MusicList />
+                    <MusicApp />
                 </div>
             </div>
         );
