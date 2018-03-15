@@ -38,19 +38,6 @@
 .songAuthor {
     font-size: 14px;
 }
-.barWr {
-    width: 180px;
-    margin: 0 auto;
-}
-.barFull {
-    position: relative;
-    height: 3px;
-    background: #ccc;
-    cursor: pointer;
-}
-.barLeft {
-    display: block;
-    height: 3px;
-    width: 0;
-    background: #969696;
+.songSelected {
+    background: #e6e3e3;
 }

@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/songActions';
-import MusicList from './MusicList';
+import MusicList from '../components/MusicList';
 import SongItem from '../components/SongItem';
+import styles from '../../css/songApp.css';
 
 class MusicApp extends React.Component {
     constructor() {
@@ -11,15 +12,17 @@ class MusicApp extends React.Component {
 
         this.state = {
             currTime: 0,
-            duration: 0
+            duration: 0,
+            currentSongInfo: ''
         };
 
         this.audio = new Audio();
+
         // this.audio.onloadedmetadata = () => {
         //     this.setState({
-        //         duration: this.audio.duration
+        //         currentSongInfo: this.audio.duration
         //     })};
-        //this.audio.addEventListener("timeupdate", () => this.updateBar(), false);
+        this.audio.ontimeupdate = () => { this.updateBar() };
     }
 
     componentDidMount() {
@@ -33,11 +36,19 @@ class MusicApp extends React.Component {
         json.forEach(song => this.props.addSong({ song }));
     }
 
+    getCurrentSongInfo(id) {
+        return this.props.songsObj.songArray.filter(el => el.id === id)[0];
+    }
+
     // Controls
     setSongSrc(id) {
-        const song = this.props.songsObj.songArray.filter(el => el.id === id)[0];
+        const song = this.getCurrentSongInfo(id);
         this.audio.src = song.songSrc;
         //this.audio.setAttribute('src', song.songSrc);
+
+        this.setState({
+            currentSongInfo: song
+        });
     }
 
     playSong(id) {
@@ -74,34 +85,44 @@ class MusicApp extends React.Component {
     }
 
     setTime(e) {
-        var x = e.clientX - e.currentTarget.offsetLeft;
-
+        const barElement = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - barElement.x;
+        
         // converting px to percent
-        var perc = 100 * x / e.currentTarget.getBoundingClientRect().width;
+        var perc = 100 * x / barElement.width;
         this.audio.currentTime = perc * this.audio.duration / 100;
         this.updateBar();
     }
 
     render() {
         const { songsObj } = this.props;
+        const { currentSongInfo } = this.state;
+
+        let currentSong = '';
+        if (currentSongInfo) {
+            currentSong = 
+            <div className='row'>
+                <div className='col-4'><img src={currentSongInfo.imgSrc} alt="" className={styles.songImg} /></div>
+                <div className='col-8'>
+                    <p>{currentSongInfo.author} - {currentSongInfo.title}</p>
+                    <p>{currentSongInfo.album} ({currentSongInfo.year})</p>
+                    <div className={styles.barWr}>
+                        <div className={styles.barFull} onClick={(e) => this.setTime(e)} >
+                            <span className={styles.barLeft} style={{width: this.state.currTime + '%'}}></span>
+                        </div>
+                    </div>
+                </div>
+            </div>;
+        };
+
         if (songsObj) {
             return(
-                <div>
-                    {/* <audio ref={(ref) => { this.audio = ref; }}></audio> */}
-                    <div>
-                        {songsObj.songArray.map((el, i) => {
-                            let isSelected = Boolean(songsObj.currentSong == el.id);
-                            //let audioData = (isSelected) ? {duration:this.state.duration,currTime:this.state.currTime} : null;
-                            return <SongItem 
-                                key={i} 
-                                song={el} 
-                                playClick={this.switchPlaying.bind(this)}
-                                setTime={this.setTime.bind(this)}
-                                selected={isSelected}
-                                duration={this.state.duration}
-                                isPlaying={Boolean(songsObj.isPlaying && isSelected)}
-                                 />
-                        })}
+                <div className='row'>
+                    <div className='col-4'>
+                        <MusicList songsObj={songsObj} playClick={this.switchPlaying.bind(this)} />
+                    </div>
+                    <div className='col-8'>
+                        { currentSong }
                     </div>
                 </div>
             );

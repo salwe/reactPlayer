@@ -1,0 +1,19 @@
+.songImg {
+    max-width: 100%;
+}
+
+.barWr {
+    margin: 0 auto;
+}
+.barFull {
+    position: relative;
+    height: 3px;
+    background: #ccc;
+    cursor: pointer;
+}
+.barLeft {
+    display: block;
+    height: 3px;
+    width: 0;
+    background: #969696;
+}
